@@ -1,17 +1,12 @@
-function levelOrderBottom(root) {
-  if (!root) return [];
-  const result = [];
-  const queue = [root];
-  while (queue.length) {
-    const levelSize = queue.length;
-    const currentLevel = [];
-    for (let i = 0; i < levelSize; i++) {
-      const node = queue.shift();
-      currentLevel.push(node.val);
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
+function rotate(matrix) {
+  const n = matrix.length;
+  for (let i = 0; i < Math.floor(n / 2); i++) {
+    for (let j = i; j < n - i - 1; j++) {
+      const temp = matrix[i][j];
+      matrix[i][j] = matrix[n - j - 1][i];
+      matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];
+      matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];
+      matrix[j][n - i - 1] = temp;
     }
-    result.unshift(currentLevel);
   }
-  return result;
 }
